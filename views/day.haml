@@ -1,0 +1,10 @@
+#day
+
+  #browse
+    %a.older{:href => "/#{fd(@date - 1.day)}"} older
+    %a.newer{:href => "/#{fd(@date + 1.day)}"} newer
+
+  #pictures
+    - @photos.each do |picture|
+      %a{:href => picture, :rel => 'facebox'}
+        %img{:src => picture}
