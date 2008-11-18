@@ -1,26 +1,14 @@
 %w{rubygems sinatra haml active_support}.each {|lib| require lib}
+Sinatra::Application.default_options.merge!(:run => false, :env => :production) if $passenger
+Sinatra.application.options.views = '/Users/kjell/Sites/dailies/views'
 
-Sinatra::Application.default_options.merge!(
-  :run => false,
-  :env => :production,
-  :views_directory => 'views'
-) if $passenger
-
-def photos(year, month, day=nil)
-  base = '/Users/Shared/dailies/'
-  Dir["#{base}#{year}/#{month}/#{day || '**'}/*.jpg"].map do |loc|
-    sym_loc = loc.gsub(base, '/imgs/')
-    "#{sym_loc}" # symlink the photos, apparently I can't just render file:// uris
-  end
+def photos(year, month, day=nil, base='/Users/Shared/dailies/')
+  Dir["#{base}#{year}/#{month}/#{day || '**'}/*.jpg"].map {|loc| loc.gsub(base, '/imgs/')}
 end
 
 helpers do
-  def fd(date, ymd=true)
-    date.strftime(ymd ? '%Y-%m-%d' : '%Y-%m')
-  end
+  def fd(date, ymd=true); date.strftime(ymd ? '%Y-%m-%d' : '%Y-%m'); end
 end
-
-Sinatra.application.options.views = '/Users/kjell/Sites/dailies/views'
 
 get '/' do
   redirect "/#{fd(Date.today)}"
