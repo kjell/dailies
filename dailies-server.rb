@@ -14,12 +14,16 @@ get '/' do
 end
 
 get '/:d' do
+  headers['Cache-Control'] = 'public, max-age=300'
+  
   @date = params[:d] ? Date.parse(params[:d]) : Date.today
   @photos = photos(*@date.strftime('%Y %m %d').split)
   haml :day
 end
 
 get '/m/:ym' do
+  headers['Cache-Control'] = 'public, max-age=900'
+  
   @date = Date.parse(params[:ym] + '-1')
   @photos = photos(*@date.strftime('%Y %m').split)
   haml :month
