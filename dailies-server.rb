@@ -1,6 +1,5 @@
 %w{rubygems sinatra haml active_support}.each {|lib| require lib}
-Sinatra::Application.default_options.merge!(:run => false, :env => :production) if $passenger
-Sinatra.application.options.views = '/Users/kjell/Sites/dailies/views'
+{:run => false, :environment => :production}.each {|k, v| set k, v} if $passenger
 
 def photos(year, month, day=nil, base='/Users/Shared/dailies/')
   Dir["#{base}#{year}/#{month}/#{day || '**'}/*.jpg"].map {|loc| loc.gsub(base, '/imgs/')}
