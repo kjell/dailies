@@ -1,4 +1,4 @@
-%w{rubygems sinatra haml active_support}.each {|lib| require lib}
+%w{rubygems sinatra/lib/sinatra haml active_support}.each {|lib| require lib}
 {:run => false, :environment => :production}.each {|k, v| set k, v} if $passenger
 
 def photos(year, month, day=nil, base='/Users/Shared/dailies/')
@@ -13,23 +13,23 @@ get '/' do
   redirect "/#{fd(Date.today)}"
 end
 
-get '/:d' do
+get '/ornamentation.css' do
+  content_type 'text/css', :charset => 'utf-8'
+  sass :ornamentation
+end
+
+get '/:date' do |d|
   headers['Cache-Control'] = 'public, max-age=300'
-  
-  @date = params[:d] ? Date.parse(params[:d]) : Date.today
+
+  @date   = Date.parse(d) rescue Date.today
   @photos = photos(*@date.strftime('%Y %m %d').split)
   haml :day
 end
 
-get '/m/:ym' do
+get '/m/:year_month' do |ym|
   headers['Cache-Control'] = 'public, max-age=900'
   
-  @date = Date.parse(params[:ym] + '-1')
+  @date   = Date.parse(ym + '-1')
   @photos = photos(*@date.strftime('%Y %m').split)
   haml :month
-end
-
-get '/ornamentation.css' do
-  content_type 'text/css', :charset => 'utf-8'
-  sass :ornamentation
 end
