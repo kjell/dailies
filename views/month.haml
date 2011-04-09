@@ -1,7 +1,7 @@
 #month
   #browse
-    %a.older{:href => "/m/#{fd(@date - 1.month, false)}"} older
-    %a.newer{:href => "/m/#{fd(@date + 1.month, false)}"} newer
+    %a.older{:href => "/m/#{fd(@date - 31, false)}"} older
+    %a.newer{:href => "/m/#{fd(@date + 31, false)}"} newer
   #pictures
     - @photos.each do |picture|
       %a{:href => picture, :rel => 'facebox'}

@@ -1,10 +1,10 @@
 %html
   %head
     %title Daily photos of yours truly.
-    - %w[ornamentation facebox/facebox].each do |css|
+    - %w[ornamentation facebox].each do |css|
       %link{:rel => 'stylesheet', :href => "/#{css}.css", :type => 'text/css'}
     - %w[jquery facebox].each do |js|
-      %script{:src => "/facebox/#{js}.js", :type => 'text/javascript'}
+      %script{:src => "/#{js}.js", :type => 'text/javascript'}
     %script{:type => 'text/javascript'}
       jQuery(document).ready(function($) {$('a[rel*=facebox]').facebox()});
   %body= yield
