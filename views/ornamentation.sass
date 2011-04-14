@@ -1,27 +1,31 @@
+$border: 0.25em solid #eee
+
 #day
+  position: absolute
+  left: 1em
+  top: 1.5em
+  width: 432px
+  border-right: $border
+  min-height: 44%
+  
   #pictures
-    width: 84%
-    margin: 1em auto
-    border: 2em solid #eee
+    margin: 5px
   
     img
-      width: 10%
-      margin: 4px
       padding: 0
+      width: 66px
+      display: inline
 
-#browse
-  width: 77%
-  margin: 1em auto
+  #browse
 
-  a
-    display: block
-    width: 45%
-    padding: .77em
+    a
+      display: block
+      padding: .77em
 
-  .newer
-    margin-top: -43px
-    float: right
-    text-align: right
+    .newer
+      margin-top: -43px
+      float: right
+      text-align: right
 
 #month
   #pictures
@@ -41,3 +45,14 @@
 #pictures
   a
     text-decoration: none
+
+#photo
+  position: absolute
+  left: 454px
+  top: 0.5em
+  
+  img
+    padding: 0.5em
+    border-bottom: 1px solid #eee
+    
+    
