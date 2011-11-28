@@ -1,7 +1,7 @@
 %w{rubygems sinatra haml sass active_support date}.each {|lib| require lib}
 {:run => false, :environment => :production}.each {|k, v| set k, v} if $passenger
 
-def photos(year, month, day=nil, base='/Volumes/tanque/Users/Shared/dailies/')
+def photos(year, month, day=nil, base='/Users/Shared/dailies/')
   Dir["#{base}#{year}/#{month}/#{day || '**'}/*.jpg"].map {|loc| loc.gsub(base, '/imgs/')}
 end
 
